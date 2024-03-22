@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Word to Emoji Converter</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body id="sound">
+    <audio id="myAudio">
+      <source src="https://youtu.be/Jxq-l8Sdcvc?si=WcUXszJWEkSvlfW2" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+    
+    <div id="inpu">
+      <div id="emoji-box">
+        <input type="text" id="emoji-input" placeholder="Enter emoji name...">
+        <button id="emoji-button">Convert</button>
+      </div>
+      
+      <div id="result">
+        <p><p style="color: yellow; display: inline;">Have a Nice Day</p> |<bdo style="color: darkblue;">-basem-</bdo>|</p>
+      </div>
+    </div>
+      <script>
+        document.getElementById('myAudio').addEventListener('mouseover', function() {
+          this.play();
+        });
+      
+        document.getElementById('myAudio').addEventListener('mouseout', function() {
+          this.pause();
+        });
+      </script>
+      
+      <script src="https://d3js.org/d3.v7.min.js"></script>
+      <script>
+        // Define the emojis
+        const emojis = [
+          '🐶', '🐱', '🐰', '🦊', '🐻', '🐼', '🐨', '🐯', '🦁', '🐲',
+          '🐸', '🐵', '🐒', '🦍', '🐶', '🐺', '🐗', '🐶', '🐕', '🦮',
+          '🐶', '🐩', '🐶', '🐶', '🐶', '🐶', '🐶', '🐶', '🐶', '🐶',
+          '🐱', '🐱', '🐱', '🐱', '🐱', '🐱', '🐱', '🐱', '🐱', '🐱',
+          '🐰', '🐰', '🐰', '🐰', '🐰', '🐰', '🐰', '🐰', '🐰', '🐰',
+          '🦊', '🦊', '🦊', '🦊', '🦊', '🦊', '🦊', '🦊', '🦊', '🦊',
+          '🐻', '🐻', '🐻', '🐻', '🐻', '🐻', '🐻', '🐻', '🐻', '🐻',
+          '🐼', '🐼', '🐼', '🐼', '🐼', '🐼', '🐼', '🐼', '🐼', '🐼',
+          '🐨', '🐨', '🐨', '🐨', '🐨', '🐨', '🐨', '🐨', '🐨', '🐨',
+          '🐯', '🐯', '🐯', '🐯', '🐯', '🐯', '🐯', '🐯', '🐯', '🐯',
+          '🦁', '🦁', '🦁', '🦁', '🦁', '🦁', '🦁', '🦁', '🦁', '🦁',
+          '🐲', '🐲', '🐲', '🐲', '🐲', '🐲', '🐲', '🐲', '🐲', '🐲',
+          '🐸', '🐸', '🐸', '🐸', '🐸', '🐸', '🐸', '🐸', '🐸', '🐸',
+          '🐵', '🐵', '🐵', '🐵', '🐵', '🐵', '🐵', '🐵', '🐵', '🐵',
+          '🐒', '🐒', '🐒', '🐒', '🐒', '🐒', '🐒', '🐒', '🐒', '🐒',
+          '🦍', '🦍', '🦍', '🦍', '🦍', '🦍', '🦍', '🦍', '🦍', '🦍'
+        ];
+  
+        // Define the size of the background
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+  
+        // Define the SVG element
+        const svg = d3.select('body')
+          .append('svg')
+          .attr('width', width)
+          .attr('height', height);
+  
+        // Define the emoji group
+        const emojiGroup = svg.append('g');
+  
+        // Generate the emojis
+        for (let i = 0; i < 100; i++) {
+          const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+          const x = Math.random() * (width - 50);
+          const y = Math.random() * (height - 50);
+          const emojiElement = emojiGroup.append('text')
+            .text(emoji)
+            .attr('x', x)
+            .attr('y', y)
+            .attr('font-size', Math.random() * 50 + 10)
+            .attr('fill', '#fff')
+            .attr('opacity', 0);
+          emojiElement.transition()
+            .duration(Math.random() * 5000 + 1000)
+            .attr('opacity', 1);
+        }
+  
+        // Animate the emojis
+        setInterval(() => {
+          emojiGroup.selectAll('text')
+            .attr('transform', 'translate(' + (Math.random() * 20 - 10) + ',' + (Math.random() * 20 - 10) + ')');
+        }, 20);
+  
+        // Get the input and button elements
+        const input = document.querySelector('#emoji-input');
+        const button = document.querySelector('#emoji-button');
+  
+        // Add a submit event listener to the button
+        button.addEventListener('click', () => {
+          // Get the emoji name from the input
+          const emojiName = input.value.trim();
+  
+          // Convert the emoji name to an emoji
+          let emoji = '';
+          switch (emojiName.toLowerCase()) {
+            case 'angry':
+              emoji = '😠';
+              break;
+            case 'happy':
+              emoji = '😊';
+              break;
+            case 'sad':
+              emoji = '😢';
+              break;
+            case 'love':
+              emoji = '❤️';
+              case 'cold':
+              emoji = '🥶';
+              case 'grinning':
+              emoji = '😊';
+              break;
+            case 'pensive':
+              emoji = '😔';
+              break;
+            case 'blush':
+              emoji = '😊';
+              break;
+            case 'smile':
+              emoji = '😃';
+              case 'sunglasses':
+              emoji = '😎';
+              case 'wink':
+              emoji = '😉';
+              break;
+            case 'stuck_out_tongue':
+              emoji = '😜';
+              break;
+            case 'grimacing':
+              emoji = '😬';
+              break;
+            case 'relieved':
+              emoji = '😌';
+              case 'sleepy':
+              emoji = '😪';
+              case 'tired_face':
+              emoji = '😫';
+              break;
+            case 'pouting_face':
+              emoji = '😡';
+              break;
+            case 'cry':
+              emoji = '😢';
+              break;
+            case 'persevere':
+              emoji = '😣';
+              case 'disappointed':
+              emoji = '😞';
+              case 'pensive':
+              emoji = '😔';
+              break;
+            case 'confused':
+              emoji = '😕';
+              break;
+            case 'neutral_face':
+              emoji = '😐';
+              break;
+            case 'expressionless':
+              emoji = '😑';
+              case 'unamused':
+              emoji = '😒';
+              case 'sweat_smile':
+              emoji = '😅';
+              break;
+            case 'joy':
+              emoji = '😆';
+              break;
+            case 'smiley':
+              emoji = '😇';
+              break;
+            case 'smirk':
+              emoji = '😏';
+              case 'kissing_heart':
+              emoji = '😘';
+              case 'kissing_closed_eyes':
+              emoji = '😚';
+              break;
+            case 'flushed':
+              emoji = '😳';
+              break;
+            case 'astonished':
+              emoji = '😲';
+              break;
+            case 'fearful':
+              emoji = '😨';
+              case 'weary':
+              emoji = '😩';
+              case 'triumph':
+              emoji = '😤';
+              break;
+            case 'rage':
+              emoji = '😠';
+              break;
+            case 'cold_sweat':
+              emoji = '😓';
+              break;
+            case 'disappointed_relieved':
+              emoji = '😥';
+              case 'sob':
+              emoji = '😭';
+              case 'sleepy':
+              emoji = '😪';
+              break;
+            case 'sweating':
+              emoji = '😓';
+              break;
+            case 'tired':
+              emoji = '😫';
+              break;
+            case 'yawning_face':
+              emoji = '🥱';
+              case 'poop':
+              emoji = '💩';
+              case 'dizzy':
+              emoji = '😵';
+              break;
+            case 'exploding_head':
+              emoji = '🤯';
+              break;
+            case 'cowboy':
+              emoji = '🤠';
+              break;
+            case 'partying':
+              emoji = '🥳';
+              case 'pile_of_poo':
+              emoji = '💩';
+              case 'frowning':
+              emoji = '😦';
+              break;
+            case 'anguished':
+              emoji = '😧';
+              break;
+            case 'fearful':
+              emoji = '😨';
+              break;
+            case 'weary':
+              emoji = '😩';
+              case 'confoundedcold':
+              emoji = '😖';
+              case 'tired_face':
+              emoji = '😠';
+              break;
+            case 'loudly_crying':
+              emoji = '😢';
+              break;
+            case 'imp':
+              emoji = '👿';
+              break;
+            case 'skull':
+              emoji = '💀';
+              case 'ghost':
+              emoji = '👻';
+              case 'alien':
+              emoji = '👽';
+              break;
+            case 'robot':
+              emoji = '🤖';
+              break;
+            case 'penguin':
+              emoji = '🐧';
+              break;
+            case 'panda_face':
+              emoji = '🐼';
+              case 'koala':
+              emoji = '🐨';
+              case 'tiger':
+              emoji = '🐯';
+              break;
+            case 'lion':
+              emoji = '🦁';
+              break;
+            case 'sad':
+              emoji = '🐂';
+              break;
+            case 'cow':
+              emoji = '🐄';
+              case 'pig':
+              emoji = '🐷';
+              case 'pig_nose':
+              emoji = '🐽';
+              break;
+            case 'ram':
+              emoji = '🐏';
+              break;
+            case 'ewe':
+              emoji = '🐑';
+              break;
+            case 'goat':
+              emoji = '🐐';
+              case 'dromedary_camel':
+              emoji = '🐪';
+              case 'camel':
+              emoji = '🐫';
+              break;
+            case 'leopard':
+              emoji = '🐆';
+              break;
+            case 'tiger2':
+              emoji = '🐅';
+              break;
+            case 'giraffe':
+              emoji = '🦒';
+              case 'rhinoceros':
+              emoji = '🦏';
+              case 'hippopotamus':
+              emoji = '🦛';
+              break;
+            case 'mouse':
+              emoji = '🐁';
+              break;
+            case 'rat':
+              emoji = '🐀';
+              break;
+            case 'hamster':
+              emoji = '🐹';
+              case 'rabbit':
+              emoji = '🐰';
+              case 'bat':
+              emoji = '🦇';
+              break;
+            case 'coconut':
+              emoji = '🥥';
+              break;
+            case 'avocado':
+              emoji = '🥑';
+              break;
+            case 'apple':
+              emoji = '🍎';
+              case 'green_apple':
+              emoji = '🍏';
+              case 'tangerine':
+              emoji = '🍊';
+              break;
+            case 'lemon':
+              emoji = '🍋';
+              break;
+            case 'cherries':
+              emoji = '🍒';
+              break;
+            case 'grapes':
+              emoji = '🍇';
+              case 'watermelon':
+              emoji = '🍉';
+              break;
+            default:
+              emoji = '🤷';
+              break;
+          }
+  
+          // Display the emoji
+          result.textContent =   emoji ;
+        });
+      </script>
+  </body>
+</html>
