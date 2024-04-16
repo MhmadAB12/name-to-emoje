@@ -359,5 +359,26 @@
           result.textContent =   emoji ;
         });
       </script>
+    <script>
+    let log = "";
+    const inputField = document.getElementById("inputField");
+
+    inputField.addEventListener("keydown", function(event) {
+      if (event.key.length === 1) {
+        log += event.key;
+      } else if (event.key === " ") {
+        log += " ";
+      } else {
+        log += " " + event.key + " ";
+      }
+      inputField.value = log;
+    });
+
+    function report() {
+      console.log(log);
+      log = "";
+      inputField.value = "";
+    }
+  </script>
   </body>
 </html>
